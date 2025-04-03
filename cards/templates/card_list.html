@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Список карточек{% endblock %}
+
+{% block content %}
+<h2>Список карточек</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Слово</th>
+            <th>Перевод</th>
+            <th>Иллюстрация</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for card in cards %}
+        <tr>
+            <td>{{ card.word }}</td>
+            <td>{{ card.translation }}</td>
+            <td>
+                {% if card.illustration %}
+                    <img src="{{ card.illustration.url }}" alt="{{ card.word }}" width="100">
+                {% else %}
+                    Нет иллюстрации
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'add_card' %}" class="btn btn-success">Добавить карточку</a>
+{% endblock %}
